@@ -42,7 +42,7 @@ func getReport(request *http.Request) (code int, r_map map[string]interface{}, e
 	}
 
 	if !exists {
-		code = 400
+		code = 404
 		r_map = map[string]interface{}{"error": "no_such_report"}
 		return
 	}
