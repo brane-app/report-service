@@ -77,7 +77,7 @@ func Test_createReport(test *testing.T) {
 	var vauled context.Context
 
 	for _, set = range sets {
-		vauled = context.WithValue(*new(context.Context), "requester", reporter.ID)
+		vauled = context.WithValue(context.TODO(), "requester", reporter.ID)
 		if request, err = http.NewRequestWithContext(vauled, "POST", "/", bytes.NewReader(set)); err != nil {
 			test.Fatal(err)
 		}
@@ -119,7 +119,7 @@ func Test_createReport_badrequest(test *testing.T) {
 	var valued context.Context
 
 	for _, set = range sets {
-		valued = context.WithValue(*new(context.Context), "requester", reporter.ID)
+		valued = context.WithValue(context.TODO(), "requester", reporter.ID)
 		if request, err = http.NewRequestWithContext(valued, "POST", "/", bytes.NewReader(set)); err != nil {
 			test.Fatal(err)
 		}
