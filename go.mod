@@ -9,3 +9,5 @@ require (
 	github.com/imonke/monkelib v0.0.0-20200718153650-0de4bf0665e9
 	github.com/imonke/monketype v0.0.0-20200729032806-76932a99fc50
 )
+
+replace github.com/imonke/monkebase => ../../monkebase

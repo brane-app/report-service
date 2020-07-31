@@ -194,3 +194,55 @@ func Test_getReport_notfound(test *testing.T) {
 		test.Errorf("%#v", r_map)
 	}
 }
+
+func Test_ReportQueue(test *testing.T) {
+	monkebase.EmptyTable(monkebase.REPORT_TABLE)
+
+	var size, index int = 20, 0
+	var reports []monketype.Report = make([]monketype.Report, size)
+	var report monketype.Report
+	var err error
+	for index != size {
+		report = monketype.NewReport(reporter.ID, uuid.New().String(), "user", "")
+		if err = monkebase.WriteReport(report.Map()); err != nil {
+			test.Fatal(err)
+		}
+
+		reports[index] = report
+		index++
+	}
+
+	var offset, count int = 2, 16
+	var valued context.Context = context.WithValue(
+		context.TODO(),
+		"parsed_query",
+		map[string]int{"offset": offset, "size": count},
+	)
+
+	var request *http.Request
+	if request, err = http.NewRequestWithContext(valued, "GET", "/new", nil); err != nil {
+		test.Fatal(err)
+	}
+
+	var code int
+	var r_map map[string]interface{}
+	if code, r_map, err = getReportQueue(request); err != nil {
+		test.Fatal(err)
+	}
+
+	if code != 200 {
+		test.Errorf("got code %d", code)
+	}
+
+	var fetched_size int = r_map["size"].(map[string]int)["reports"]
+	if fetched_size != count {
+		test.Errorf("got size %d\n%#v", fetched_size, r_map["reports"])
+	}
+
+	var fetched monketype.Report
+	for index, fetched = range r_map["reports"].([]monketype.Report) {
+		if err = reportOK(reporter, fetched); err != nil {
+			test.Fatal(err)
+		}
+	}
+}

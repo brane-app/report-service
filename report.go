@@ -20,7 +20,6 @@ func getReportQueue(request *http.Request) (code int, r_map map[string]interface
 	var reports []monketype.Report
 	var size int
 	if reports, size, err = monkebase.ReadManyUnresolvedReport(query["offset"], query["size"]); err != nil {
-		panic(err)
 		return
 	}
 
