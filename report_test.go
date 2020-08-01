@@ -246,3 +246,48 @@ func Test_ReportQueue(test *testing.T) {
 		}
 	}
 }
+
+func Test_updateReport(test *testing.T) {
+	var reported string = uuid.New().String()
+	var report monketype.Report = monketype.NewReport(reporter.ID, reported, "user", "do not like, not even a little")
+
+	var err error
+	if err = monkebase.WriteReport(report.Map()); err != nil {
+		test.Fatal(err)
+	}
+
+	var resolution string = "we are bros now"
+	var resolved bool = true
+	var data []byte = mustMarshal(map[string]interface{}{
+		"resolution": resolution,
+		"resolved":   resolved,
+	})
+
+	var request *http.Request
+	if request, err = http.NewRequest("PATCH", "/id/"+report.ID+"/", bytes.NewReader(data)); err != nil {
+		test.Fatal(err)
+	}
+
+	var code int
+	var r_map map[string]interface{}
+	if code, r_map, err = updateReport(request); err != nil {
+		test.Fatal(err)
+	}
+
+	if code != 200 {
+		test.Errorf("got code %d", code)
+	}
+
+	var fetched monketype.Report = r_map["report"].(monketype.Report)
+	if err = reportOK(reporter, fetched); err != nil {
+		test.Fatal(err)
+	}
+
+	if fetched.Resolution != resolution {
+		test.Errorf("got resolution %s", fetched.Resolution)
+	}
+
+	if fetched.Resolved != resolved {
+		test.Errorf("got resolved %t", fetched.Resolved)
+	}
+}

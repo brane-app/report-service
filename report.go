@@ -71,3 +71,53 @@ func createReport(request *http.Request) (code int, r_map map[string]interface{}
 	r_map = map[string]interface{}{"report": report}
 	return
 }
+
+func patchReport(body PatchReportBody, report monketype.Report) (patched monketype.Report, changed bool) {
+	patched = report
+
+	if body.Resolved != nil {
+		changed = true
+		patched.Resolved = *body.Resolved
+	}
+
+	if body.Resolution != nil && *body.Resolution != "" {
+		changed = true
+		patched.Resolution = *body.Resolution
+	}
+
+	return
+}
+
+func updateReport(request *http.Request) (code int, r_map map[string]interface{}, err error) {
+	var body PatchReportBody
+	var external error
+	if err, external = groudon.SerializeBody(request.Body, &body); err != nil || external != nil {
+		code = 400
+		return
+	}
+
+	var parts []string = strings.FieldsFunc(request.URL.Path, pathSplit)
+	var id string = parts[len(parts)-1]
+
+	var report monketype.Report
+	var ok bool
+	if report, ok, err = monkebase.ReadSingleReport(id); !ok || err != nil {
+		code = 404
+		r_map = map[string]interface{}{"error": "no_such_report"}
+		return
+	}
+
+	if report, ok = patchReport(body, report); !ok {
+		code = 400
+		return
+	}
+
+	if err = monkebase.WriteReport(report.Map()); err != nil {
+		panic(err)
+		return
+	}
+
+	code = 200
+	r_map = map[string]interface{}{"report": report}
+	return
+}

@@ -30,8 +30,7 @@ func main() {
 	groudon.RegisterHandler("POST", `^/$`, createReport)
 	groudon.RegisterHandler("GET", `^/new/?$`, getReportQueue)
 	groudon.RegisterHandler("GET", `^/id/`+uuid_regex+`/?$`, getReport)
-	// groudon.RegisterHandler("PATCH", `^/id/`+uuid_regex+`/?$`, updateReport)
-	// groudon.RegisterHandler("GET", `^/user/`+uuid_regex+`/?$`, getUserReports)
+	groudon.RegisterHandler("PATCH", `^/id/`+uuid_regex+`/?$`, updateReport)
 
 	http.Handle("/", http.HandlerFunc(groudon.Route))
 	log.Fatal(http.ListenAndServe(":8000", nil))
