@@ -24,7 +24,8 @@ func main() {
 	groudon.RegisterCatch(403, forbidden)
 	groudon.RegisterMiddleware(middleware.MustAuth)
 	groudon.RegisterMiddleware(middleware.RangeQueryParams)
-	// groudon.RegisterMiddleware(ReaderMustModerator)
+
+	groudon.RegisterMiddlewareRoute([]string{"GET", "PATCH"}, `^/(id|new).*$`, MustModerator)
 
 	groudon.RegisterHandler("POST", `^/$`, createReport)
 	groudon.RegisterHandler("GET", `^/new/?$`, getReportQueue)
