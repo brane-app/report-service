@@ -2,11 +2,15 @@ github.com/gastrodon/groudon v0.0.0-20200722154958-227901ab43f1 h1:UG7pFuw7akhll
 github.com/gastrodon/groudon v0.0.0-20200722154958-227901ab43f1/go.mod h1:5pCqXI8gvquh7Lp7S3LOpUgQ32JXWdrIKums+zpPwjs=
 github.com/gastrodon/groudon v0.0.0-20200801011029-9df5f02a8eb6 h1:+EPYB5adRF1DcSBx2lQre0MB4jErZpcRXdw89LBmLzE=
 github.com/gastrodon/groudon v0.0.0-20200801011029-9df5f02a8eb6/go.mod h1:5pCqXI8gvquh7Lp7S3LOpUgQ32JXWdrIKums+zpPwjs=
+github.com/gastrodon/groudon v0.0.0-20200810225227-33d8da43a46d h1:ymso08KxnpwmB4m8VT8cwFbCeuai35P1zEP0/Ax3x0g=
+github.com/gastrodon/groudon v0.0.0-20200810225227-33d8da43a46d/go.mod h1:5pCqXI8gvquh7Lp7S3LOpUgQ32JXWdrIKums+zpPwjs=
 github.com/go-sql-driver/mysql v1.4.0/go.mod h1:zAC/RDZ24gD3HViQzih4MyKcchzm+sOG5ZlKdlhCg5w=
 github.com/go-sql-driver/mysql v1.5.0 h1:ozyZYNQW3x3HtqT1jira07DN2PArx2v7/mN66gGcHOs=
 github.com/go-sql-driver/mysql v1.5.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LBy8hT2VhHyBg=
 github.com/google/uuid v1.1.1 h1:Gkbcsh/GbpXz7lPftLA3P6TYMwjCLYm83jiFQZF/3gY=
 github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+github.com/google/uuid v1.1.2 h1:EVhdT+1Kseyi1/pUmXKaFxYsDNy9RQYkMWRH68J/W7Y=
+github.com/google/uuid v1.1.2/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/imonke/monkebase v0.0.0-20200717040938-ff87d755de3e/go.mod h1:tnl8UuA/8tmi6FtaOpRkQpzEcnMzqmuaspow2zofsvY=
 github.com/imonke/monkebase v0.0.0-20200719031609-9a6b2e7df88f h1:XnGe+P9XuTIYcAAzuRrMPmoYVwqnA7fmPn8A1K+XAEo=
 github.com/imonke/monkebase v0.0.0-20200719031609-9a6b2e7df88f/go.mod h1:BLU+UOnHsn9p2atIqkVb7Pp4eqlgEKJbaO5qJfmrOHM=
@@ -16,8 +20,12 @@ github.com/imonke/monkebase v0.0.0-20200729032911-9ea0a9c5a0a7 h1:0FAZpz3cJbxH4Z
 github.com/imonke/monkebase v0.0.0-20200729032911-9ea0a9c5a0a7/go.mod h1:mPbX7vxFHfy9SFYjRl8PqujNQBQh8haJhzXrgj0epzk=
 github.com/imonke/monkebase v0.0.0-20200729040815-7b886535f0f7 h1:uP0pTRkjCrfIadiGjb2vvqx+80Yp071VzfSMWmRDPSo=
 github.com/imonke/monkebase v0.0.0-20200729040815-7b886535f0f7/go.mod h1:4LVGEd9tPFV87yLMhJzpsHz5qxWiJZ8DozqUgUW5/EU=
+github.com/imonke/monkebase v0.0.0-20201111032832-5890c2b1cc4c h1:CK2A/9gjElPSW3g99+x3lp0knvI72NNs1BMFgqDY0h0=
+github.com/imonke/monkebase v0.0.0-20201111032832-5890c2b1cc4c/go.mod h1:ZfXu2Q+i8POwrgitRKY9YI2L+HeH7u2ZpGpBUdmlNgM=
 github.com/imonke/monkelib v0.0.0-20200718153650-0de4bf0665e9 h1:uELWKT7vQbCRl08ZJhir8dKGK0DBWk9v8N63MGOYbT4=
 github.com/imonke/monkelib v0.0.0-20200718153650-0de4bf0665e9/go.mod h1:TdzvZjJmpU0Ynyp+xjoWocur/IAhl3uhFMnpCtDp+E0=
+github.com/imonke/monkelib v0.0.0-20201111060014-0ab4477be8e3 h1:JxQbB1CaZTk+Rd7UoeL3Dyy1UuS0Pud/m2wDsE3N1vM=
+github.com/imonke/monkelib v0.0.0-20201111060014-0ab4477be8e3/go.mod h1:fMKAREH16VjiipDCbErwFYxd/lQlqAIQjE5HPgIp+ms=
 github.com/imonke/monketype v0.0.0-20200716234900-cc809fe194ca/go.mod h1:+P64NN1CPbgU+kebfKsap37nZ8dR90c5SWO62/ZykUc=
 github.com/imonke/monketype v0.0.0-20200718195524-2d705e2aa768 h1:eLvIlbi2B325zWh2JeOkuqtWL3WxVAm2PbO0dmLReL4=
 github.com/imonke/monketype v0.0.0-20200718195524-2d705e2aa768/go.mod h1:+P64NN1CPbgU+kebfKsap37nZ8dR90c5SWO62/ZykUc=
@@ -25,6 +33,8 @@ github.com/imonke/monketype v0.0.0-20200729024903-eb81a249cd14 h1:vAgYAlvJ7dE8Lo
 github.com/imonke/monketype v0.0.0-20200729024903-eb81a249cd14/go.mod h1:+P64NN1CPbgU+kebfKsap37nZ8dR90c5SWO62/ZykUc=
 github.com/imonke/monketype v0.0.0-20200729032806-76932a99fc50 h1:8A9h4ozgVAZwQNU8btdWw3K1IOIk74rVj/5DPbc1KXM=
 github.com/imonke/monketype v0.0.0-20200729032806-76932a99fc50/go.mod h1:+P64NN1CPbgU+kebfKsap37nZ8dR90c5SWO62/ZykUc=
+github.com/imonke/monketype v0.0.0-20201108235822-b761f9de344a h1:TSrGEgGtMUyGau9d+8XOr+y19RRfghvKnMojndAdQ+E=
+github.com/imonke/monketype v0.0.0-20201108235822-b761f9de344a/go.mod h1:+P64NN1CPbgU+kebfKsap37nZ8dR90c5SWO62/ZykUc=
 github.com/jmoiron/sqlx v1.2.0 h1:41Ip0zITnmWNR/vHV+S4m+VoUivnWY5E4OJfLZjCJMA=
 github.com/jmoiron/sqlx v1.2.0/go.mod h1:1FEQNm3xlJgrMD+FBdI9+xvCksHtbpVBBw5dYhBSsks=
 github.com/lib/pq v1.0.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
@@ -38,6 +48,8 @@ golang.org/x/crypto v0.0.0-20200709230013-948cd5f35899 h1:DZhuSZLsGlFL4CmhA8BcRA
 golang.org/x/crypto v0.0.0-20200709230013-948cd5f35899/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
 golang.org/x/crypto v0.0.0-20200728195943-123391ffb6de h1:ikNHVSjEfnvz6sxdSPCaPt572qowuyMDMJLLm3Db3ig=
 golang.org/x/crypto v0.0.0-20200728195943-123391ffb6de/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
+golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897 h1:pLI5jrR7OSLijeIDcmRxNmw2api+jEfxLoykJVice/E=
+golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
 golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
 golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
 golang.org/x/sys v0.0.0-20190412213103-97732733099d/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
