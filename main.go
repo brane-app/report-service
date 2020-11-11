@@ -23,8 +23,8 @@ func main() {
 
 	groudon.RegisterCatch(403, forbidden)
 	groudon.RegisterMiddleware(middleware.MustAuth)
-	groudon.RegisterMiddleware(middleware.RangeQueryParams)
 
+	groudon.RegisterMiddlewareRoute([]string{"GET"}, "^/new/?", middleware.PaginationParams)
 	groudon.RegisterMiddlewareRoute([]string{"GET", "PATCH"}, `^/(id|new).*$`, MustModerator)
 
 	groudon.RegisterHandler("POST", `^/$`, createReport)
