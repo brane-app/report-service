@@ -212,11 +212,11 @@ func Test_ReportQueue(test *testing.T) {
 		index++
 	}
 
-	var offset, count int = 2, 16
+	var count int = 16
 	var valued context.Context = context.WithValue(
 		context.TODO(),
-		"parsed_query",
-		map[string]int{"offset": offset, "size": count},
+		"query",
+		map[string]interface{}{"after": "", "size": count},
 	)
 
 	var request *http.Request

@@ -15,11 +15,11 @@ func pathSplit(it rune) (ok bool) {
 }
 
 func getReportQueue(request *http.Request) (code int, r_map map[string]interface{}, err error) {
-	var query map[string]int = request.Context().Value("parsed_query").(map[string]int)
-
+	var query map[string]interface{} = request.Context().Value("query").(map[string]interface{})
+	var after string = query["after"].(string)
+	var size int = query["size"].(int)
 	var reports []monketype.Report
-	var size int
-	if reports, size, err = monkebase.ReadManyUnresolvedReport(query["offset"], query["size"]); err != nil {
+	if reports, size, err = monkebase.ReadManyUnresolvedReport(after, size); err != nil {
 		return
 	}
 
