@@ -28,6 +28,8 @@ github.com/imonke/monkelib v0.0.0-20200718153650-0de4bf0665e9 h1:uELWKT7vQbCRl08
 github.com/imonke/monkelib v0.0.0-20200718153650-0de4bf0665e9/go.mod h1:TdzvZjJmpU0Ynyp+xjoWocur/IAhl3uhFMnpCtDp+E0=
 github.com/imonke/monkelib v0.0.0-20201111060014-0ab4477be8e3 h1:JxQbB1CaZTk+Rd7UoeL3Dyy1UuS0Pud/m2wDsE3N1vM=
 github.com/imonke/monkelib v0.0.0-20201111060014-0ab4477be8e3/go.mod h1:fMKAREH16VjiipDCbErwFYxd/lQlqAIQjE5HPgIp+ms=
+github.com/imonke/monkelib v0.0.0-20201111190605-89e83a0f1afa h1:y6SV1pD5/mD8cUaPE+zbNOEwt1AEwnIFOArY8PgBg+8=
+github.com/imonke/monkelib v0.0.0-20201111190605-89e83a0f1afa/go.mod h1:fMKAREH16VjiipDCbErwFYxd/lQlqAIQjE5HPgIp+ms=
 github.com/imonke/monketype v0.0.0-20200716234900-cc809fe194ca/go.mod h1:+P64NN1CPbgU+kebfKsap37nZ8dR90c5SWO62/ZykUc=
 github.com/imonke/monketype v0.0.0-20200718195524-2d705e2aa768 h1:eLvIlbi2B325zWh2JeOkuqtWL3WxVAm2PbO0dmLReL4=
 github.com/imonke/monketype v0.0.0-20200718195524-2d705e2aa768/go.mod h1:+P64NN1CPbgU+kebfKsap37nZ8dR90c5SWO62/ZykUc=
