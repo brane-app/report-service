@@ -216,7 +216,7 @@ func Test_ReportQueue(test *testing.T) {
 	var valued context.Context = context.WithValue(
 		context.TODO(),
 		"query",
-		map[string]interface{}{"after": "", "size": count},
+		map[string]interface{}{"before": "", "size": count},
 	)
 
 	var request *http.Request
