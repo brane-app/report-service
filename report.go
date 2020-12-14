@@ -1,18 +1,13 @@
 package main
 
 import (
-	"github.com/gastrodon/groudon"
 	"git.gastrodon.io/imonke/monkebase"
+	"git.gastrodon.io/imonke/monkelib"
 	"git.gastrodon.io/imonke/monketype"
+	"github.com/gastrodon/groudon"
 
 	"net/http"
-	"strings"
 )
-
-func pathSplit(it rune) (ok bool) {
-	ok = it == '/'
-	return
-}
 
 func getReportQueue(request *http.Request) (code int, r_map map[string]interface{}, err error) {
 	var query map[string]interface{} = request.Context().Value("query").(map[string]interface{})
@@ -32,7 +27,7 @@ func getReportQueue(request *http.Request) (code int, r_map map[string]interface
 }
 
 func getReport(request *http.Request) (code int, r_map map[string]interface{}, err error) {
-	var parts []string = strings.FieldsFunc(request.URL.Path, pathSplit)
+	var parts []string = monkelib.SplitPath(request.URL.Path)
 
 	var report monketype.Report
 	var exists bool
@@ -96,7 +91,7 @@ func updateReport(request *http.Request) (code int, r_map map[string]interface{}
 		return
 	}
 
-	var parts []string = strings.FieldsFunc(request.URL.Path, pathSplit)
+	var parts []string = monkelib.SplitPath(request.URL.Path)
 	var id string = parts[len(parts)-1]
 
 	var report monketype.Report
