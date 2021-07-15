@@ -1,37 +1,19 @@
 package main
 
 import (
-	"git.gastrodon.io/imonke/monkebase"
-	"git.gastrodon.io/imonke/monkelib/middleware"
-	"github.com/gastrodon/groudon"
+	"github.com/brane-app/database-library"
+	"github.com/gastrodon/groudon/v2"
 
 	"log"
 	"net/http"
 	"os"
 )
 
-const (
-	uuid_regex = `[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}`
-)
-
-var (
-	forbidden = map[string]interface{}{"error": "forbidden"}
-)
-
 func main() {
-	monkebase.Connect(os.Getenv("MONKEBASE_CONNECTION"))
+	database.Connect(os.Getenv("DATABASE_CONNECTION"))
 
-	groudon.RegisterCatch(403, forbidden)
-	groudon.RegisterMiddleware(middleware.MustAuth)
+	register_handlers()
 
-	groudon.RegisterMiddlewareRoute([]string{"GET"}, "^/new/?", middleware.PaginationParams)
-	groudon.RegisterMiddlewareRoute([]string{"GET", "PATCH"}, `^/(id|new).*$`, middleware.MustModerator)
-
-	groudon.RegisterHandler("POST", `^/$`, createReport)
-	groudon.RegisterHandler("GET", `^/new/?$`, getReportQueue)
-	groudon.RegisterHandler("GET", `^/id/`+uuid_regex+`/?$`, getReport)
-	groudon.RegisterHandler("PATCH", `^/id/`+uuid_regex+`/?$`, updateReport)
-
-	http.Handle("/", http.HandlerFunc(groudon.Route))
+	http.Handle(os.Getenv("PATH_PREFIX")+"/", http.HandlerFunc(groudon.Route))
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
