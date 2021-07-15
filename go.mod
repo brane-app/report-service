@@ -1,4 +1,4 @@
-module git.gastrodon.io/imonke/reporter-create-service
+module github.com/brane-app/reporter-create-service
 
 go 1.13
 
