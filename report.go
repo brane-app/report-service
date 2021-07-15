@@ -1,10 +1,10 @@
 package main
 
 import (
-	"git.gastrodon.io/imonke/monkebase"
-	"git.gastrodon.io/imonke/monkelib"
-	"git.gastrodon.io/imonke/monketype"
-	"github.com/gastrodon/groudon"
+	"github.com/brane-app/database-library"
+	"github.com/brane-app/tools-library"
+	"github.com/brane-app/types-library"
+	"github.com/gastrodon/groudon/v2"
 
 	"net/http"
 )
@@ -13,8 +13,8 @@ func getReportQueue(request *http.Request) (code int, r_map map[string]interface
 	var query map[string]interface{} = request.Context().Value("query").(map[string]interface{})
 	var before string = query["before"].(string)
 	var size int = query["size"].(int)
-	var reports []monketype.Report
-	if reports, size, err = monkebase.ReadManyUnresolvedReport(before, size); err != nil {
+	var reports []types.Report
+	if reports, size, err = database.ReadManyUnresolvedReport(before, size); err != nil {
 		return
 	}
 
@@ -27,11 +27,11 @@ func getReportQueue(request *http.Request) (code int, r_map map[string]interface
 }
 
 func getReport(request *http.Request) (code int, r_map map[string]interface{}, err error) {
-	var parts []string = monkelib.SplitPath(request.URL.Path)
+	var parts []string = tools.SplitPath(request.URL.Path)
 
-	var report monketype.Report
+	var report types.Report
 	var exists bool
-	if report, exists, err = monkebase.ReadSingleReport(parts[len(parts)-1]); err != nil {
+	if report, exists, err = database.ReadSingleReport(parts[len(parts)-1]); err != nil {
 		return
 	}
 
@@ -55,19 +55,19 @@ func createReport(request *http.Request) (code int, r_map map[string]interface{}
 	}
 
 	var reporter string = request.Context().Value("requester").(string)
-	var report monketype.Report = monketype.NewReport(
+	var report types.Report = types.NewReport(
 		reporter, body.Reported,
 		body.Type,
 		body.Reason,
 	)
 
-	err = monkebase.WriteReport(report.Map())
+	err = database.WriteReport(report.Map())
 	code = 200
 	r_map = map[string]interface{}{"report": report}
 	return
 }
 
-func patchReport(body PatchReportBody, report monketype.Report) (patched monketype.Report, changed bool) {
+func patchReport(body PatchReportBody, report types.Report) (patched types.Report, changed bool) {
 	patched = report
 
 	if body.Resolved != nil {
@@ -91,12 +91,12 @@ func updateReport(request *http.Request) (code int, r_map map[string]interface{}
 		return
 	}
 
-	var parts []string = monkelib.SplitPath(request.URL.Path)
+	var parts []string = tools.SplitPath(request.URL.Path)
 	var id string = parts[len(parts)-1]
 
-	var report monketype.Report
+	var report types.Report
 	var ok bool
-	if report, ok, err = monkebase.ReadSingleReport(id); !ok || err != nil {
+	if report, ok, err = database.ReadSingleReport(id); !ok || err != nil {
 		code = 404
 		r_map = map[string]interface{}{"error": "no_such_report"}
 		return
@@ -107,7 +107,7 @@ func updateReport(request *http.Request) (code int, r_map map[string]interface{}
 		return
 	}
 
-	if err = monkebase.WriteReport(report.Map()); err != nil {
+	if err = database.WriteReport(report.Map()); err != nil {
 		panic(err)
 		return
 	}

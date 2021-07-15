@@ -1,8 +1,8 @@
 package main
 
 import (
-	"git.gastrodon.io/imonke/monkebase"
-	"git.gastrodon.io/imonke/monketype"
+	"github.com/brane-app/database-library"
+	"github.com/brane-app/types-library"
 	"github.com/google/uuid"
 
 	"bytes"
@@ -20,7 +20,7 @@ const (
 )
 
 var (
-	reporter monketype.User
+	reporter types.User
 )
 
 func mustMarshal(it interface{}) (data []byte) {
@@ -32,7 +32,7 @@ func mustMarshal(it interface{}) (data []byte) {
 	return
 }
 
-func reportOK(reporter monketype.User, report monketype.Report) (err error) {
+func reportOK(reporter types.User, report types.Report) (err error) {
 	if reporter.ID != report.Reporter {
 		err = fmt.Errorf("ID mismatch! have: %s, want: %s", reporter.ID, report.Reporter)
 		return
@@ -42,16 +42,16 @@ func reportOK(reporter monketype.User, report monketype.Report) (err error) {
 }
 
 func TestMain(main *testing.M) {
-	monkebase.Connect(os.Getenv("DATABASE_CONNECTION"))
-	reporter = monketype.NewUser(nick, "", email)
+	database.Connect(os.Getenv("DATABASE_CONNECTION"))
+	reporter = types.NewUser(nick, "", email)
 
 	var err error
-	if err = monkebase.WriteUser(reporter.Map()); err != nil {
+	if err = database.WriteUser(reporter.Map()); err != nil {
 		panic(err)
 	}
 
 	var result int = main.Run()
-	monkebase.DeleteUser(reporter.ID)
+	database.DeleteUser(reporter.ID)
 	os.Exit(result)
 }
 
@@ -90,7 +90,7 @@ func Test_createReport(test *testing.T) {
 			test.Errorf("got code %d", code)
 		}
 
-		if err = reportOK(reporter, r_map["report"].(monketype.Report)); err != nil {
+		if err = reportOK(reporter, r_map["report"].(types.Report)); err != nil {
 			test.Fatal(err)
 		}
 
@@ -141,10 +141,10 @@ func Test_createReport_badrequest(test *testing.T) {
 func Test_getReport(test *testing.T) {
 	var reporter string = uuid.New().String()
 	var reported string = uuid.New().String()
-	var report monketype.Report = monketype.NewReport(reporter, reported, "user", "")
+	var report types.Report = types.NewReport(reporter, reported, "user", "")
 
 	var err error
-	if err = monkebase.WriteReport(report.Map()); err != nil {
+	if err = database.WriteReport(report.Map()); err != nil {
 		test.Fatal(err)
 	}
 
@@ -196,15 +196,15 @@ func Test_getReport_notfound(test *testing.T) {
 }
 
 func Test_ReportQueue(test *testing.T) {
-	monkebase.EmptyTable(monkebase.REPORT_TABLE)
+	database.EmptyTable(database.REPORT_TABLE)
 
 	var size, index int = 20, 0
-	var reports []monketype.Report = make([]monketype.Report, size)
-	var report monketype.Report
+	var reports []types.Report = make([]types.Report, size)
+	var report types.Report
 	var err error
 	for index != size {
-		report = monketype.NewReport(reporter.ID, uuid.New().String(), "user", "")
-		if err = monkebase.WriteReport(report.Map()); err != nil {
+		report = types.NewReport(reporter.ID, uuid.New().String(), "user", "")
+		if err = database.WriteReport(report.Map()); err != nil {
 			test.Fatal(err)
 		}
 
@@ -239,8 +239,8 @@ func Test_ReportQueue(test *testing.T) {
 		test.Errorf("got size %d\n%#v", fetched_size, r_map["reports"])
 	}
 
-	var fetched monketype.Report
-	for index, fetched = range r_map["reports"].([]monketype.Report) {
+	var fetched types.Report
+	for index, fetched = range r_map["reports"].([]types.Report) {
 		if err = reportOK(reporter, fetched); err != nil {
 			test.Fatal(err)
 		}
@@ -249,10 +249,10 @@ func Test_ReportQueue(test *testing.T) {
 
 func Test_updateReport(test *testing.T) {
 	var reported string = uuid.New().String()
-	var report monketype.Report = monketype.NewReport(reporter.ID, reported, "user", "do not like, not even a little")
+	var report types.Report = types.NewReport(reporter.ID, reported, "user", "do not like, not even a little")
 
 	var err error
-	if err = monkebase.WriteReport(report.Map()); err != nil {
+	if err = database.WriteReport(report.Map()); err != nil {
 		test.Fatal(err)
 	}
 
@@ -278,7 +278,7 @@ func Test_updateReport(test *testing.T) {
 		test.Errorf("got code %d", code)
 	}
 
-	var fetched monketype.Report = r_map["report"].(monketype.Report)
+	var fetched types.Report = r_map["report"].(types.Report)
 	if err = reportOK(reporter, fetched); err != nil {
 		test.Fatal(err)
 	}
