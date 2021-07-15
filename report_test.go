@@ -42,7 +42,7 @@ func reportOK(reporter monketype.User, report monketype.Report) (err error) {
 }
 
 func TestMain(main *testing.M) {
-	monkebase.Connect(os.Getenv("MONKEBASE_CONNECTION"))
+	monkebase.Connect(os.Getenv("DATABASE_CONNECTION"))
 	reporter = monketype.NewUser(nick, "", email)
 
 	var err error
