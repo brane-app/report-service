@@ -14,8 +14,8 @@ const (
 var (
 	prefix = os.Getenv("PATH_PREFIX")
 
-	routeAny                 = "^" + prefix + "/.*"
-	routeRoot                = "^" + prefix + "/$"
+	routeAny                 = "^" + prefix + "/?.*"
+	routeRoot                = "^" + prefix + "/?$"
 	routeNew                 = "^" + prefix + "/new/?$"
 	routeId                  = "^" + prefix + "/id/" + uuid_regex + "/?$"
 	routeModeratorRestricted = "^" + prefix + "/(id|new).*$"
